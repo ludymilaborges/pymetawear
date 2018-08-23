@@ -16,11 +16,11 @@ from __future__ import absolute_import
 import time
 from functools import partial
 
-from pymetawear.discover import select_device
+#from pymetawear.discover import select_device
 from pymetawear.client import MetaWearClient
 from mbientlab.metawear.cbindings import SensorFusionData, SensorFusionGyroRange, SensorFusionAccRange, SensorFusionMode
 
-address = select_device()
+address = 'CC:AE:1D:8A:C8:23'
 c = MetaWearClient(str(address), debug=True)
 print("New client created: {0}".format(c))
 
@@ -36,18 +36,18 @@ c.sensorfusion.set_mode(SensorFusionMode.NDOF)
 #c.sensorfusion.set_gyro_range(SensorFusionGyroRange._1000DPS)
 
 print("Set Time Processor to limit data rate to 50Hz for each channel")
-#c.sensorfusion.set_sample_delay(SensorFusionData.EULER_ANGLE, 20)
-c.sensorfusion.set_sample_delay(SensorFusionData.QUATERNION, 20)
-c.sensorfusion.set_sample_delay(SensorFusionData.CORRECTED_ACC, 20)
+c.sensorfusion.set_sample_delay(SensorFusionData.EULER_ANGLE, 20)
+#c.sensorfusion.set_sample_delay(SensorFusionData.QUATERNION, 20)
+#c.sensorfusion.set_sample_delay(SensorFusionData.CORRECTED_ACC, 20)
 #c.sensorfusion.set_sample_delay(SensorFusionData.CORRECTED_GYRO, 20)
 
 print("Subscribing to Sensor Fusion Quaternion signal notifications...")
-#c.sensorfusion.notifications(euler_angle_callback=handle_notification)
+c.sensorfusion.notifications(euler_angle_callback=handle_notification)
 #c.sensorfusion.notifications(quaternion_callback=handle_notification)
-c.sensorfusion.notifications(
-    corrected_acc_callback=partial(handle_notification, type_='Acc '),
-    quaternion_callback=partial(handle_notification, type_='Quat'),
-    corrected_gyro_callback=partial(handle_notification, type_='Gyro'))
+#c.sensorfusion.notifications(
+#    corrected_acc_callback=partial(handle_notification, type_='Acc '),
+#    quaternion_callback=partial(handle_notification, type_='Quat'),
+#    corrected_gyro_callback=partial(handle_notification, type_='Gyro'))
 
 #time.sleep(2.0)
 
