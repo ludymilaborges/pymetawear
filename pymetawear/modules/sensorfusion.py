@@ -61,23 +61,11 @@ class SensorFusionModule(PyMetaWearLoggingModule):
         self.current_active_signal = None
 
         self._streams_to_enable = {
-            SensorFusionData.CORRECTED_ACC: False,
-            SensorFusionData.CORRECTED_GYRO: False,
-            SensorFusionData.CORRECTED_MAG: False,
-            SensorFusionData.QUATERNION: False,
             SensorFusionData.EULER_ANGLE: False,
-            SensorFusionData.GRAVITY_VECTOR: False,
-            SensorFusionData.LINEAR_ACC: False,
         }
 
         self._data_source_signals = {
-            SensorFusionData.CORRECTED_ACC: None,
-            SensorFusionData.CORRECTED_GYRO: None,
-            SensorFusionData.CORRECTED_MAG: None,
-            SensorFusionData.QUATERNION: None,
             SensorFusionData.EULER_ANGLE: None,
-            SensorFusionData.GRAVITY_VECTOR: None,
-            SensorFusionData.LINEAR_ACC: None,
         }
 
         self._callbacks = {}
@@ -199,13 +187,7 @@ class SensorFusionModule(PyMetaWearLoggingModule):
 
     @require_fusion_module
     def notifications(self,
-                      corrected_acc_callback=None,
-                      corrected_gyro_callback=None,
-                      corrected_mag_callback=None,
-                      quaternion_callback=None,
-                      euler_angle_callback=None,
-                      gravity_callback=None,
-                      linear_acc_callback=None):
+                      euler_angle_callback=None):
         """Subscribe or unsubscribe to sensor fusion notifications.
 
         Convenience method for handling sensor fusion usage.
@@ -251,13 +233,7 @@ class SensorFusionModule(PyMetaWearLoggingModule):
 
         """
         callback_data_source_map = {
-            SensorFusionData.CORRECTED_ACC: corrected_acc_callback,
-            SensorFusionData.CORRECTED_GYRO: corrected_gyro_callback,
-            SensorFusionData.CORRECTED_MAG: corrected_mag_callback,
-            SensorFusionData.QUATERNION: quaternion_callback,
-            SensorFusionData.EULER_ANGLE: euler_angle_callback,
-            SensorFusionData.GRAVITY_VECTOR: gravity_callback,
-            SensorFusionData.LINEAR_ACC: linear_acc_callback
+            SensorFusionData.EULER_ANGLE: euler_angle_callback,  
         }
 
         for data_source in callback_data_source_map:

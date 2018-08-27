@@ -17,12 +17,12 @@ import time
 import numpy as np
 from functools import partial
 
-from pymetawear.discover import select_device
+#from pymetawear.discover import select_device
 from pymetawear.client import MetaWearClient
 from mbientlab.metawear.cbindings import SensorFusionData, SensorFusionMode
 
-address = select_device()
-#address = 'CC:AE:1D:8A:C8:23'
+#address = select_device()
+address = 'CC:AE:1D:8A:C8:23'
 c = MetaWearClient(str(address), debug=True)
 # print("New client created: {0}".format(c))
 
