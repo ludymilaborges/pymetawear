@@ -1,0 +1,6 @@
+/build/
+/dist/
+/warble.egg-info/
+mbientlab/warble/*.so*
+mbientlab/warble/*.dll*
+*.pyc
